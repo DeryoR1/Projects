@@ -1,3 +1,5 @@
+If you come across this page, please leave some advice.
+
 # C++ Calculator
 
 this is a simple c++ calculator setup with a switch instead of if loops.
