@@ -1,19 +1,10 @@
-If you come across this page, please leave some advice.
+On my page i post practice projects of programming languages. At the moment i only upload C++ projects, that's because i am trying to teach myself this language.
+In the future i want to learn other languages and these will have they're own branches.
 
-# C++ Calculator
+If you come across this page, please leave some useful advice for me, because i try to self-learn i do not know how the structure is build within the code. The code i write is based upon other people's code but further than that i do not know for sure if this is the correct build style.
 
-this is a simple c++ calculator setup with a switch instead of if loops.
-I used the switch to make it easier to read and easier to write, this forced me to learn what a switch is and what it does.
+Every project i upload will have a section in the README within they're respective branch.
+My projects are written from a Linux system and used for a Linux system and i do not know if the code works on Windows (unless i include a line of explanation if i tested it).
 
-Everything is written in the main, the calculator is small enough to do it this way, also with this setup there is room for an upgrade and it makes it easy to implement the update.
-the calculator is not tested for windows.
+I do not expect that the code won't work on Windows but i don't know what is OS based code yet.
 
-# C++ CardCounter for blackjack
-
-With this card counter it is possible to keep track of the running count, true count, how many cards are left in  the shoe and how many decks are left in the shoe.
-It is also possible to put in a custom amount of complete decks of cards. most used in casino's is 8 decks in 1 shoe.
-
-Although this program can come in handy for people who want to learn card counting, this program has a massive flaw. You have to put in all the value's one by one in the terminal, this means that the user is only focusing on the input and not with the game.
-Because i cannot build a GUI or an algoritm that track the card value's automaticly this has to be like this for now.
-
-(this is not tested on windows but it should work, the program uses basic c++ and nothing that is linux only)
