@@ -15,3 +15,7 @@ Although this program can come in handy for people who want to learn card counti
 Because i cannot build a GUI or an algoritm that track the card value's automaticly this has to be like this for now.
 
 (this is not tested on windows but it should work, the program uses basic c++ and nothing that is linux only)
+
+#C++ Inventory System
+
+This program will be build out to be an inventory system for a store, with pointers to minimize memory usage.
