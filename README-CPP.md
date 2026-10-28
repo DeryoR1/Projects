@@ -16,6 +16,6 @@ Because i cannot build a GUI or an algoritm that track the card value's automati
 
 (this is not tested on windows but it should work, the program uses basic c++ and nothing that is linux only)
 
-#C++ Inventory System
+# C++ Inventory System
 
 This program will be build out to be an inventory system for a store, with pointers to minimize memory usage.
