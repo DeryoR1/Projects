@@ -18,4 +18,8 @@ Because i cannot build a GUI or an algoritm that track the card value's automati
 
 # C++ Inventory System
 
-This program will be build out to be an inventory system for a store, with pointers to minimize memory usage.
+The inventory system is a basic program that let you keep track of an inventory. It lets you fill in different objects as you like, it lets you put in a price of a specific item in the list and it let you fill in how much of that specific item you got left in stock.
+All the variables are used as strings because i do not know how to convert a string or a chararcter into a different type variable (e.g a float variable).
+
+Although the program is operational, it has a long way to go to become really useful. like adding an option that lets you change the value of an item after the first input, also it would be come in handy if the program saved itself after its closed.
+(not tested on a windows system)
