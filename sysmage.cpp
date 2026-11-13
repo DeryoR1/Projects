@@ -1,39 +1,95 @@
 #include <iostream>
+#include <cstdlib>
+#include <sys/ioctl.h>
+#include <unistd.h>
 
-void SystemDiagnose(){
+int GetTerminalWidth(){
+	struct winsize w;
+	
+	if(ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0){
+		return w.ws_col;
+	}
+	return 80;
+}
+
+void PrintSeparator(char symbol = '-'){
+	int width = GetTerminalWidth();
+
+	for(int i = 0; i < width; i++){
+		std::cout << symbol;
+	}
+	std::cout << '\n';
+}
+
+void Menu(){
+	std::cout << "Make your choice:\n ";
+	std::cout << "0: Exit\n";
+	std::cout << "1: System-Diagnostics\n";
+	std::cout << "2: Resource & Memory Profiler\n";
+	std::cout << "3: Disk Cleaner\n";
+	std::cout << "4: LAN Device Manager\n";
+	std::cout << "5: Antivirus\n";
+	std::cout << "input here: ";
+}
+
+void Diagnose(){
+	
+}
+
+void Profiler(){
+	//journalctl
+	std::system("journalctl -n 20");
+	PrintSeparator('=');
+	//dmesg
+	std::system("dmesg --color=always -T | tail -n 20");
+	PrintSeparator('=');
+	//df
+	std::system("df -h -a -T --total");
+	PrintSeparator('=');
+	//vmstat
+	std::system("vmstat -adtw");
+	PrintSeparator('=');
+	//iostat
+	std::system("iostat -p -t -x");
+	PrintSeparator('=');
+}
+
+void DiskCleaner(){
+	
+}
+
+void LDM(){
+	
+}
+
+void Antivirus(){
 	
 }
 
 int main(){
-	int choice;
-
-	std::cout << "Make your choice: " << '\n';
-	std::cout << "0: Exit" << '\n';
-	std::cout << "1: System-Diagnostics" << '\n';
-	std::cout << "2: Resource & Memory Profiler" << '\n';
-	std::cout << "3: Disc Cleaner" << '\n';
-	std::cout << "4: LAN Device Manager" << '\n';
-	std::cout << "5: Antivirus" << '\n';
+	int Choice = -1;
 	
-	std::cout << "input here: ";
-	std::cin >> choice;
+	while(Choice != 0){
+		Menu();
+		std::cin >> Choice;
 
-		switch(choice){
+		switch(Choice){
 			case 1:
-				std::cout << "test 1" << '\n';
+				Diagnose();
 				break;
 			case 2:
-				std::cout << "test 2" << '\n';
+				Profiler();
 				break;
 			case 3:
-				std::cout << "test 3" << '\n';
+				DiskCleaner();
 				break;
 			case 4:
-				std::cout << "test 4" << '\n';
+				LDM();
 				break;
 			case 5:
-				std::cout << "test 5" << '\n';
+				Antivirus();
 				break;	
 		};
+	}
 	return 0;
 }
