@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdlib>
+#include <string>
 #include <sys/ioctl.h>
 #include <unistd.h>
 
@@ -12,11 +12,24 @@ int GetTerminalWidth(){
 	return 80;
 }
 
-void PrintSeparator(char symbol = '-'){
-	int width = GetTerminalWidth();
+void PrintSeparator(const std::string& text){
+	int TotalWidth = GetTerminalWidth();
+	int TextLength = text.length();
 
-	for(int i = 0; i < width; i++){
-		std::cout << symbol;
+	if(TotalWidth <= TextLength + 4){
+		std::cout << "=" << text << "=\n";
+		return;
+	}
+	int RemainingSpace = TotalWidth - TextLength - 2;
+	int LeftSide = RemainingSpace / 2;
+	int RightSide = RemainingSpace - LeftSide;
+
+	for(int i = 0; i < LeftSide; i++){
+		std::cout << '=';
+	}
+	std::cout << ' ' << text << ' ';
+	for(int i = 0; i < RightSide; i++){
+		std::cout << '=';
 	}
 	std::cout << '\n';
 }
@@ -33,37 +46,92 @@ void Menu(){
 }
 
 void Diagnose(){
+	//1 system health
+	// 1.1 failed systemd services
+	// 1.2 boot errors
+	// 1.3 kernel warnings
+
+	//2 hardware health
+	// 2.1 smart disk status
+	// 2.2 fan temp.
+	// 2.3 memory stress
+
+	//3 network security
+	// 3.1 open ports
+	// 3.2 firewall status
+	// 3.3 failed logins
+
+	//4 system management
+	// 4.1 app errors
+	// 4.2 disk inodes
 	
 }
 
 void Profiler(){
-	//journalctl
-	std::system("journalctl -n 20");
-	PrintSeparator('=');
-	//dmesg
+	//1 journalctl
+	PrintSeparator("SYSTEM LOGS");
+	std::system("journalctl -n 20 --no-pager");
+	//2 dmesg
+	PrintSeparator("KERNEL LOGS");
 	std::system("dmesg --color=always -T | tail -n 20");
-	PrintSeparator('=');
-	//df
+	//3 df
+	PrintSeparator("DISK USAGE");
 	std::system("df -h -a -T --total");
-	PrintSeparator('=');
-	//vmstat
+	//4 vmstat
+	PrintSeparator("VIRTUAL MEMORY");
 	std::system("vmstat -adtw");
-	PrintSeparator('=');
-	//iostat
+	//5 iostat
+	PrintSeparator("IOSTAT");
 	std::system("iostat -p -t -x");
-	PrintSeparator('=');
+	PrintSeparator("END");
 }
 
 void DiskCleaner(){
+	//1 cache clean-up
 	
+	//2 log clean-up
+
+	//3 user cache
+	// 3.1 trashbin clean-up
+	// 3.2 browsercache clean-up
+
+	//4 kernel clean-up
+
+	//5 container clean-up
 }
 
 void LDM(){
-	
+	//1 LAN scanning
+	// 1.1 ip & mac gathering
+	// 1.2 hostname gathering
+
+	//2 hardware ID
+
+	//3 device port scanning
+
+	//4 wake-on-LAN
+
+	//5 network tree
+	// 5.1 device tree
+	// 5.2 gateway
+	// 5.3 arp table
+	// 5.4 traceroute
 }
 
 void Antivirus(){
-	
+	//1 malware scanner
+	// 1.1 file traverser
+	// 1.2 file inspection
+	// 1.2 hash inspection
+	// 1.3 patern recognition
+	// 1.4 downloads folder check
+	// 1.5 real time monitor
+	// 1.6 archive inspection
+
+	//2 quarantine zone
+	// 2.1 isolated folder
+	// 2.2 moving files to iso. folder
+	// 2.3 saving metadatae files NOT copy
 }
 
 int main(){
