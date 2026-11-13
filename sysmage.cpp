@@ -1,5 +1,9 @@
 #include <iostream>
 
+void SystemDiagnose(){
+	
+}
+
 int main(){
 	int choice;
 
