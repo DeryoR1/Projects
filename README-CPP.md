@@ -23,3 +23,9 @@ All the variables are used as strings because i do not know how to convert a str
 
 Although the program is operational, it has a long way to go to become really useful. like adding an option that lets you change the value of an item after the first input, also it would be come in handy if the program saved itself after its closed.
 (not tested on a windows system)
+
+# C++ System Monitor
+
+The SystemMage program is a multitool program that keeps your entire linux system safe and operational, it can scan the entire system in order to find malware or other suspicious files. Not only that but it can detect files that are just present, which means they're not necessary to have installed. this program can find them and delete them, it also scans for hardware health and network security. It has a build-in LAN monitor to check for devices inside the same network, this comes in handy to have a quick check if a device is online or to check if there are unwanted guests.
+
+SysMage comes with a easy to use control panel and is build for easy implemented upgrades. With a custom made GUI this program is going to be even more advanced then it is now.
