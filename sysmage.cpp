@@ -35,33 +35,55 @@ void PrintSeparator(const std::string& text){
 }
 
 void Menu(){
-	std::cout << "Make your choice:\n ";
 	std::cout << "0: Exit\n";
 	std::cout << "1: System-Diagnostics\n";
 	std::cout << "2: Resource & Memory Profiler\n";
 	std::cout << "3: Disk Cleaner\n";
 	std::cout << "4: LAN Device Manager\n";
 	std::cout << "5: Antivirus\n";
-	std::cout << "input here: ";
+	std::cout << "Make your choice:\n ";
 }
 
 void Diagnose(){
+	int DagChoice = -1;
+	
+	std::cout << "0: back to main menu\n";
+	std::cout << "1: check system health\n";
+	std::cout << "2: check hardware health\n";
+	std::cout << "3: check network security\n";
+	std::cout << "4: system management\n";
+	std::cout << "Make a choice: ";
+	std::cin >> DagChoice;
+	
 	//1 system health
+	if(DagChoice == 1){
+		PrintSeparator("FAILED SERVICES");
+		std::system("systemctl list-units --state failed");
+
+		PrintSeparator("BOOT ERRORS");
+		std::system("journalctl -b 0 | tail -n 20 --no-pager");
+
+		PrintSeparator("KERNEL WARNINGS");
+		
+	}
 	// 1.1 failed systemd services
 	// 1.2 boot errors
 	// 1.3 kernel warnings
 
 	//2 hardware health
+	PrintSeparator("HARDWARE HEALTH");
 	// 2.1 smart disk status
 	// 2.2 fan temp.
 	// 2.3 memory stress
 
 	//3 network security
+	PrintSeparator("NETWORK SECURITY");
 	// 3.1 open ports
 	// 3.2 firewall status
 	// 3.3 failed logins
 
 	//4 system management
+	PrintSeparator("SYSTEM MANAGEMENT");
 	// 4.1 app errors
 	// 4.2 disk inodes
 	
