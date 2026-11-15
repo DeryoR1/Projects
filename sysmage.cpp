@@ -41,7 +41,7 @@ void Menu(){
 	std::cout << "3: Disk Cleaner\n";
 	std::cout << "4: LAN Device Manager\n";
 	std::cout << "5: Antivirus\n";
-	std::cout << "Make your choice:\n ";
+	std::cout << "Make your choice: ";
 }
 
 void Diagnose(){
@@ -52,7 +52,7 @@ void Diagnose(){
 	std::cout << "2: check hardware health\n";
 	std::cout << "3: check network security\n";
 	std::cout << "4: system management\n";
-	std::cout << "Make a choice: ";
+	std::cout << "Make your choice: ";
 	std::cin >> DagChoice;
 	
 	//1 system health
@@ -161,6 +161,11 @@ int main(){
 	
 	while(Choice != 0){
 		Menu();
+		
+		if(Choice > 5){
+				std::cout <<"Invalid input try again!\n";
+			}
+			
 		std::cin >> Choice;
 
 		switch(Choice){
