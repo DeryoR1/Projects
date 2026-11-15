@@ -57,18 +57,18 @@ void Diagnose(){
 	
 	//1 system health
 	if(DagChoice == 1){
+	// 1.1 failed systemd services
 		PrintSeparator("FAILED SERVICES");
 		std::system("systemctl list-units --state failed");
-
+	// 1.2 boot errors
 		PrintSeparator("BOOT ERRORS");
 		std::system("journalctl -b 0 | tail -n 20 --no-pager");
-
-		PrintSeparator("KERNEL WARNINGS");
-		
-	}
-	// 1.1 failed systemd services
-	// 1.2 boot errors
 	// 1.3 kernel warnings
+		PrintSeparator("KERNEL WARNINGS");
+	// 1.3.1 error
+	// 1.3.2 alert
+	// 1.3.3 critical
+	}
 
 	//2 hardware health
 	PrintSeparator("HARDWARE HEALTH");
