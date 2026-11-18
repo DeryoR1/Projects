@@ -56,8 +56,8 @@ void Diagnose(){
 	std::cin >> DagChoice;
 	
 	//1 system health
-	if(DagChoice == 1){
 	// 1.1 failed systemd services
+	if(DagChoice == 1){
 		PrintSeparator("FAILED SERVICES");
 		std::system("systemctl list-units --state failed");
 	// 1.2 boot errors
@@ -66,9 +66,16 @@ void Diagnose(){
 	// 1.3 kernel warnings
 		PrintSeparator("KERNEL WARNINGS");
 	// 1.3.1 error
+		std::system("echo 'error: ' $(journal -k -p err)");
 	// 1.3.2 alert
+		std::system("echo 'Alert: ' $(journalctl -k -p alert)");
 	// 1.3.3 critical
+		std::system("echo 'Critical: ' $(journalctl -k -p crit)");
+	// 1.3.4 emergency
+		std::system("echo 'Emergency: ' $(journalctl -k -p emerg)");
 	}
+
+	
 
 	//2 hardware health
 	PrintSeparator("HARDWARE HEALTH");
