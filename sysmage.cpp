@@ -20,14 +20,14 @@ void PrintSeparator(const std::string& text){
 		std::cout << "=" << text << "=\n";
 		return;
 	}
-	int RemainingSpace = TotalWidth - TextLength - 2;
+	int RemainingSpace = TotalWidth - TextLength;
 	int LeftSide = RemainingSpace / 2;
 	int RightSide = RemainingSpace - LeftSide;
 
 	for(int i = 0; i < LeftSide; i++){
 		std::cout << '=';
 	}
-	std::cout << ' ' << text << ' ';
+	std::cout << text;
 	for(int i = 0; i < RightSide; i++){
 		std::cout << '=';
 	}
@@ -45,36 +45,44 @@ void Menu(){
 }
 
 void Diagnose(){
-	int DagChoice = -1;
-	
-	std::cout << "0: back to main menu\n";
-	std::cout << "1: check system health\n";
-	std::cout << "2: check hardware health\n";
-	std::cout << "3: check network security\n";
-	std::cout << "4: system management\n";
-	std::cout << "Make your choice: ";
-	std::cin >> DagChoice;
-	
-	//1 system health
-	// 1.1 failed systemd services
-	if(DagChoice == 1){
-		PrintSeparator("FAILED SERVICES");
-		std::system("systemctl list-units --state failed");
-	// 1.2 boot errors
-		PrintSeparator("BOOT ERRORS");
-		std::system("journalctl -b 0 | tail -n 20 --no-pager");
-	// 1.3 kernel warnings
-		PrintSeparator("KERNEL WARNINGS");
-	// 1.3.1 error
-		std::system("echo 'error: ' $(journal -k -p err)");
-	// 1.3.2 alert
-		std::system("echo 'Alert: ' $(journalctl -k -p alert)");
-	// 1.3.3 critical
-		std::system("echo 'Critical: ' $(journalctl -k -p crit)");
-	// 1.3.4 emergency
-		std::system("echo 'Emergency: ' $(journalctl -k -p emerg)");
-	}
+	std::string DagChoice = "-1";
+	while(DagChoice != "0"){
+		
+		std::cout << "0: back to main menu\n";
+		std::cout << "1: check system health\n";
+		std::cout << "2: check hardware health\n";
+		std::cout << "3: check network security\n";
+		std::cout << "4: system management\n";
+		std::cout << "Make your choice: ";
 
+		if(!std::getline(std::cin, DagChoice)){
+			break;
+		}	
+		
+		//1 system health
+		// 1.1 failed systemd services
+		if(DagChoice.size() == 1 && DagChoice[0] == '1'){
+			PrintSeparator("FAILED SERVICES");
+			std::system("systemctl list-units --state failed");
+		}
+		// 1.2 boot errors
+			PrintSeparator("BOOT ERRORS");
+			std::system("journalctl -b 0 --no-pager | tail -n 20");
+		// 1.3 kernel warnings
+			PrintSeparator("KERNEL WARNINGS");
+		// 1.3.1 error
+			std::system("echo 'error: ' $(journalctl -k -p err)");
+			PrintSeparator("=");
+		// 1.3.2 alert
+			std::system("echo 'Alert: ' $(journalctl -k -p alert)");
+			PrintSeparator("=");
+		// 1.3.3 critical
+			std::system("echo 'Critical: ' $(journalctl -k -p crit)");
+			PrintSeparator("=");
+		// 1.3.4 emergency
+			std::system("echo 'Emergency: ' $(journalctl -k -p emerg)");
+			PrintSeparator("END");
+	}
 	
 
 	//2 hardware health
@@ -164,34 +172,35 @@ void Antivirus(){
 }
 
 int main(){
-	int Choice = -1;
+	std::string Choice = "-1";
 	
-	while(Choice != 0){
+	while(Choice != "0"){
 		Menu();
 		
-		if(Choice > 5){
-				std::cout <<"Invalid input try again!\n";
-			}
+		if(!std::getline(std::cin, Choice)){
+			break;
+		}
+		
+		if(Choice.size() == 1 && Choice[0] >= '0' && Choice[0] <= '5'){
 			
-		std::cin >> Choice;
-
-		switch(Choice){
-			case 1:
-				Diagnose();
-				break;
-			case 2:
-				Profiler();
-				break;
-			case 3:
-				DiskCleaner();
-				break;
-			case 4:
-				LDM();
-				break;
-			case 5:
-				Antivirus();
-				break;	
-		};
+			switch(Choice[0]){
+				case '1':
+					Diagnose();
+					break;
+				case '2':
+					Profiler();
+					break;
+				case '3':
+					DiskCleaner();
+					break;
+				case '4':
+					LDM();
+					break;
+				case '5':
+					Antivirus();
+					break;	
+			};
+		}else(std::cout << "try again\n");
 	}
 	return 0;
 }
