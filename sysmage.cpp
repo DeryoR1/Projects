@@ -107,19 +107,19 @@ void Diagnose(){
 void Profiler(){
 	//1 journalctl
 	PrintSeparator("SYSTEM LOGS");
-	std::system("journalctl -n 20 --no-pager");
+	std::system("journalctl -f -n 20 --no-pager");
 	//2 dmesg
 	PrintSeparator("KERNEL LOGS");
-	std::system("dmesg --color=always -T | tail -n 20");
+	std::system("journalctl -k -b -f -n 20 --no-pager");
 	//3 df
 	PrintSeparator("DISK USAGE");
-	std::system("df -h -a -T --total");
+	std::system("watch -n 20 "df -h -a -T --total --sync"");
 	//4 vmstat
 	PrintSeparator("VIRTUAL MEMORY");
-	std::system("vmstat -adtw");
+	std::system("vmstat -adtw 10");
 	//5 iostat
 	PrintSeparator("IOSTAT");
-	std::system("iostat -p -t -x");
+	std::system("iostat -p -t -x 10");
 	PrintSeparator("END");
 }
 
